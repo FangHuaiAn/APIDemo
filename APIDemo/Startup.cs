@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace APIDemo
 {
@@ -45,6 +46,10 @@ namespace APIDemo
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseForwardedHeaders( new ForwardedHeadersOptions {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
 
             app.UseEndpoints(endpoints =>
             {
